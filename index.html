@@ -11,7 +11,14 @@
 
     <nav>
         <div class="logo">CampusPortal</div>
-        <div class="nav-links">
+        
+        <div class="hamburger" id="hamburger-icon">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <div class="nav-links" id="nav-menu">
             <button onclick="showSection('home')" class="active-btn">Home</button>
             <button onclick="showSection('contributions')">Contributions</button>
             <button onclick="showSection('freedom')">Freedom</button>
@@ -19,7 +26,7 @@
             <button onclick="showSection('wall')">Appreciation Wall</button>
             
             <button id="login-btn" class="primary-btn" style="margin-left: 20px;">Sign In</button>
-            <button id="logout-btn" style="display: none; margin-left: 20px; background: transparent; border: 1px solid var(--primary); color: var(--primary);">Sign Out</button>
+            <button id="logout-btn" style="display: none; margin-left: 20px; background: transparent; border: 1px solid var(--primary); color: white;">Sign Out</button>
         </div>
     </nav>
 

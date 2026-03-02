@@ -25,35 +25,29 @@ const loginBtn = document.getElementById('login-btn');
 const logoutBtn = document.getElementById('logout-btn');
 const userNameInput = document.getElementById('userName');
 const messagesContainer = document.getElementById('messages-container');
+const hamburger = document.getElementById('hamburger-icon');
+const navMenu = document.getElementById('nav-menu');
 
 let currentUser = null;
 
 // --- AUTHENTICATION LOGIC ---
-
-// Listen for Login/Logout state changes
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        // User is signed in
         currentUser = user;
         loginBtn.style.display = 'none';
         logoutBtn.style.display = 'inline-block';
-        
-        // Auto-fill the name input with their Google Name
         userNameInput.value = user.displayName;
         userNameInput.disabled = true; 
     } else {
-        // User is signed out
         currentUser = null;
         loginBtn.style.display = 'inline-block';
         logoutBtn.style.display = 'none';
-        
         userNameInput.value = '';
         userNameInput.placeholder = 'Sign in to post';
         userNameInput.disabled = true;
     }
 });
 
-// Login Button Click Event
 loginBtn.addEventListener('click', async () => {
     try {
         await signInWithPopup(auth, provider);
@@ -63,7 +57,6 @@ loginBtn.addEventListener('click', async () => {
     }
 });
 
-// Logout Button Click Event
 logoutBtn.addEventListener('click', async () => {
     try {
         await signOut(auth);
@@ -72,8 +65,15 @@ logoutBtn.addEventListener('click', async () => {
     }
 });
 
+
+// --- MOBILE MENU LOGIC ---
+// Toggle menu open/closed when clicking the hamburger lines
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active-menu');
+});
+
+
 // --- NAVIGATION LOGIC ---
-// We attach showSection to 'window' so the HTML onclick tags can still find it inside this module
 window.showSection = function(sectionId) {
     document.querySelectorAll('section').forEach(section => {
         section.classList.remove('active');
@@ -90,12 +90,14 @@ window.showSection = function(sectionId) {
         clickedButton.classList.add('active-btn');
     }
 
+    // NEW: Close the mobile menu automatically after clicking a button
+    navMenu.classList.remove('active-menu');
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
-// --- DATABASE LOGIC (APPRECIATION WALL) ---
 
-// Post a new message to Firestore
+// --- DATABASE LOGIC (APPRECIATION WALL) ---
 window.postMessage = async function() {
     const messageInput = document.getElementById('userMessage');
     const messageText = messageInput.value.trim();
@@ -111,14 +113,11 @@ window.postMessage = async function() {
     }
 
     try {
-        // Add the message to the 'messages' collection in Firestore
         await addDoc(collection(db, "messages"), {
             text: messageText,
             author: currentUser.displayName,
             createdAt: serverTimestamp()
         });
-        
-        // Clear the text box after posting
         messageInput.value = ''; 
     } catch (error) {
         console.error("Error adding document: ", error);
@@ -126,11 +125,10 @@ window.postMessage = async function() {
     }
 };
 
-// Listen for new messages in real-time and display them
 const messagesQuery = query(collection(db, "messages"), orderBy("createdAt", "desc"));
 
 onSnapshot(messagesQuery, (snapshot) => {
-    messagesContainer.innerHTML = ''; // Clear out the "Loading..." text or old messages
+    messagesContainer.innerHTML = ''; 
     
     if (snapshot.empty) {
         messagesContainer.innerHTML = '<p style="text-align: center; width: 100%; color: gray;">No messages yet. Be the first to post!</p>';

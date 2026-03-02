@@ -1,11 +1,12 @@
-/* --- Global Variables --- */
+/* --- Global Variables (Orange & Blue Theme) --- */
 :root {
-    --primary: #2563eb;
-    --primary-hover: #1d4ed8;
-    --bg-color: #f1f5f9;
+    --primary: #f97316; /* Vibrant Orange */
+    --primary-hover: #ea580c; /* Darker Orange */
+    --secondary: #1e3a8a; /* Deep University Blue */
+    --bg-color: #f0f6ff; /* Very soft blue-tinted background */
     --card-bg: #ffffff;
     --text-main: #0f172a;
-    --text-muted: #64748b;
+    --text-muted: #475569;
     --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     --border-radius: 16px;
 }
@@ -25,12 +26,12 @@ body {
 
 /* --- Navigation --- */
 nav {
-    background: white;
+    background: var(--secondary);
     padding: 1rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -46,7 +47,7 @@ nav {
 .nav-links button {
     background: transparent;
     border: none;
-    color: var(--text-muted);
+    color: #e2e8f0; /* Light gray-blue for unselected tabs */
     font-size: 1rem;
     font-weight: 600;
     margin-left: 20px;
@@ -57,8 +58,8 @@ nav {
 }
 
 .nav-links button:hover, .nav-links button.active-btn {
-    color: var(--primary);
-    background: #eff6ff;
+    color: white;
+    background: var(--primary);
 }
 
 /* --- Layout & Sections --- */
@@ -86,7 +87,7 @@ h2 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 10px;
-    color: var(--text-main);
+    color: var(--secondary); /* Headers in deep blue */
 }
 
 .section-desc {
@@ -103,10 +104,12 @@ h2 {
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     transition: transform 0.3s ease;
+    border-bottom: 4px solid transparent;
 }
 
 .card:hover {
     transform: translateY(-5px);
+    border-bottom: 4px solid var(--primary);
 }
 
 .grid {
@@ -125,7 +128,7 @@ h2 {
     font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 20px;
-    color: var(--text-main);
+    color: var(--secondary);
 }
 
 .hero p {
@@ -245,8 +248,8 @@ input:focus, textarea:focus {
 textarea { resize: vertical; min-height: 100px; }
 
 .primary-btn {
-    background: var(--primary);
-    color: white;
+    background: var(--primary) !important;
+    color: white !important;
     border: none;
     padding: 15px;
     border-radius: 8px;
@@ -256,7 +259,7 @@ textarea { resize: vertical; min-height: 100px; }
     transition: background 0.3s;
 }
 
-.primary-btn:hover { background: var(--primary-hover); }
+.primary-btn:hover { background: var(--primary-hover) !important; }
 
 .messages-grid {
     display: grid;
@@ -265,21 +268,74 @@ textarea { resize: vertical; min-height: 100px; }
 }
 
 .message-card {
-    background: #fef3c7;
+    background: white;
     padding: 25px;
     border-radius: var(--border-radius);
     position: relative;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--secondary);
 }
 
 .message-card p {
     font-size: 1.1rem;
     font-style: italic;
     margin-bottom: 15px;
-    color: #451a03;
+    color: var(--text-main);
 }
 
 .message-card .author {
     font-weight: 600;
-    color: #92400e;
+    color: var(--primary);
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVENESS (HAMBURGER MENU)
+   ========================================= */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.hamburger .bar {
+    width: 28px;
+    height: 3px;
+    background-color: white; /* White lines to contrast against blue nav */
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex; 
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 65px; 
+        left: -100%; /* Hidden off-screen by default */
+        width: 100%;
+        background-color: var(--secondary); /* Match the navbar color */
+        flex-direction: column;
+        text-align: center;
+        transition: 0.3s ease-in-out; 
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        padding-bottom: 20px;
+    }
+
+    /* JavaScript toggles this class */
+    .nav-links.active-menu {
+        left: 0; 
+    }
+
+    .nav-links button {
+        margin: 15px auto !important;
+        width: 80%;
+        display: block;
+    }
+
+    .hero h1 { font-size: 2.5rem; }
+    .score { font-size: 3.5rem; }
 }
