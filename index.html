@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Respect & Freedom Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">CampusPortal</div>
+        <div class="nav-links">
+            <button onclick="showSection('home')" class="active-btn">Home</button>
+            <button onclick="showSection('contributions')">Contributions</button>
+            <button onclick="showSection('freedom')">Freedom</button>
+            <button onclick="showSection('case-study')">Case Study</button>
+            <button onclick="showSection('wall')">Appreciation Wall</button>
+            
+            <button id="login-btn" class="primary-btn" style="margin-left: 20px;">Sign In</button>
+            <button id="logout-btn" style="display: none; margin-left: 20px; background: transparent; border: 1px solid var(--primary); color: var(--primary);">Sign Out</button>
+        </div>
+    </nav>
+
+    <main id="app-container">
+        
+        <section id="home" class="active">
+            <div class="hero">
+                <h1>Respect & Freedom Portal</h1>
+                <p>Empowering our university community through mutual respect, open dialogue, and responsible liberty.</p>
+                <div class="respect-score-card">
+                    <h3>Current Campus Trust Score</h3>
+                    <div class="score">88<span>/100</span></div>
+                    <p class="trend">↑ +3 Points this Semester</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contributions">
+            <h2>Building Our Community</h2>
+            <p class="section-desc">Respect is a two-way street. Here is how we all play a part in elevating our university experience.</p>
+            
+            <div class="grid">
+                <div class="card student-card">
+                    <h3>🎓 Student Contributions</h3>
+                    <ul class="feature-list">
+                        <li><strong>Active Listening:</strong> Giving full attention during peer presentations and lectures without digital distractions.</li>
+                        <li><strong>Inclusive Collaboration:</strong> Valuing diverse perspectives during group projects and making sure everyone has a voice.</li>
+                        <li><strong>Shared Spaces:</strong> Leaving the library, cafeteria, and labs cleaner than you found them.</li>
+                        <li><strong>Constructive Disagreement:</strong> Challenging ideas, not people, during classroom debates.</li>
+                    </ul>
+                </div>
+                
+                <div class="card teacher-card">
+                    <h3>👨‍🏫 Teacher Contributions</h3>
+                    <ul class="feature-list">
+                        <li><strong>Empathetic Mentorship:</strong> Recognizing that students balance multiple deadlines, jobs, and personal challenges.</li>
+                        <li><strong>Transparent Expectations:</strong> Providing clear, fair grading rubrics and constructive feedback that helps students grow.</li>
+                        <li><strong>Creating Safe Spaces:</strong> Encouraging questions without judgment and shutting down exclusionary behavior in class.</li>
+                        <li><strong>Honoring Boundaries:</strong> Respecting students' time outside of official academic hours.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="freedom">
+            <h2>Managing Freedom Responsibly</h2>
+            <div class="card wide-card">
+                <p>University life grants immense freedom, but true independence requires accountability. Here is how we balance the scale:</p>
+                
+                <div class="flex-row">
+                    <div class="item">
+                        <h4>Freedom of Expression</h4>
+                        <p>You have the right to voice your opinions and advocate for change. <strong>Responsibility:</strong> Doing so through respectful dialogue, avoiding hate speech, and being open to changing your mind.</p>
+                    </div>
+                    <div class="item">
+                        <h4>Academic Independence</h4>
+                        <p>You have the freedom to choose your research paths and study methods. <strong>Responsibility:</strong> Upholding strict academic integrity, avoiding plagiarism, and submitting authentic work.</p>
+                    </div>
+                    <div class="item">
+                        <h4>Social Liberty</h4>
+                        <p>You have the freedom to organize events, join clubs, and socialize. <strong>Responsibility:</strong> Ensuring events are inclusive, safe, and do not disrupt the academic environment or local community.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="case-study">
+            <h2>Impact Case Study</h2>
+            <div class="comparison-container">
+                <div class="case-card before">
+                    <h3>Before Implementation</h3>
+                    <ul>
+                        <li>High anxiety during peer reviews.</li>
+                        <li>Littering in common student lounges.</li>
+                        <li>Low attendance at voluntary guest lectures due to academic burnout.</li>
+                    </ul>
+                </div>
+                <div class="case-card after">
+                    <h3>After Implementation</h3>
+                    <ul>
+                        <li><strong>95%</strong> reported feeling safer sharing unique ideas in class.</li>
+                        <li>Student-led cleanup drives reduced facility complaints by <strong>40%</strong>.</li>
+                        <li>Introduction of "Mental Health Days" increased overall attendance and grades.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="wall">
+            <h2>Appreciation Wall</h2>
+            <p class="section-desc">Take a moment to highlight someone who made the campus a better place today.</p>
+            
+            <div class="wall-form">
+                <input type="text" id="userName" placeholder="Your Name (Sign in to post)" disabled>
+                <textarea id="userMessage" placeholder="E.g., Huge thanks to the IT desk for helping me recover my lost assignment!"></textarea>
+                <button onclick="postMessage()" class="primary-btn">Post to Wall</button>
+            </div>
+            
+            <div id="messages-container" class="messages-grid">
+                <p style="text-align: center; width: 100%; color: gray;">Loading messages...</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
